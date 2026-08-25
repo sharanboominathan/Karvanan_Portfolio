@@ -80,13 +80,27 @@ export default function Portfolio() {
                   item.tall ? 'aspect-[3/4]' : 'aspect-[4/3]'
                 }`}
               >
-                <div
-                  className="absolute inset-0 transition-transform duration-700 ease-out group-hover:scale-110"
-                  style={{ background: 'linear-gradient(150deg, #202932, #0F1215)' }}
-                />
-                <div className="absolute inset-0 flex items-center justify-center opacity-15">
-                  <Camera size={40} />
-                </div>
+                {item.video ? (
+                  <video
+                    src={item.video}
+                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+                    muted
+                    loop
+                    playsInline
+                    autoPlay
+                    preload="metadata"
+                  />
+                ) : (
+                  <>
+                    <div
+                      className="absolute inset-0 transition-transform duration-700 ease-out group-hover:scale-110"
+                      style={{ background: 'linear-gradient(150deg, #202932, #0F1215)' }}
+                    />
+                    <div className="absolute inset-0 flex items-center justify-center opacity-15">
+                      <Camera size={40} />
+                    </div>
+                  </>
+                )}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent opacity-70 group-hover:opacity-90 transition-opacity duration-500" />
                 <div className="absolute bottom-0 left-0 right-0 p-5 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
                   <span className="text-[10px] font-semibold tracking-[0.2em] text-accent uppercase">{item.category}</span>
@@ -115,9 +129,19 @@ export default function Portfolio() {
               onClick={(e) => e.stopPropagation()}
               className="relative w-full max-w-3xl aspect-[4/3] rounded-neu-lg neu-card overflow-hidden"
             >
-              <div className="absolute inset-0 flex items-center justify-center" style={{ background: 'linear-gradient(150deg, #202932, #0F1215)' }}>
-                <Camera size={64} className="text-white/15" />
-              </div>
+              {active.video ? (
+                <video
+                  src={active.video}
+                  className="absolute inset-0 h-full w-full object-contain bg-black"
+                  controls
+                  autoPlay
+                  playsInline
+                />
+              ) : (
+                <div className="absolute inset-0 flex items-center justify-center" style={{ background: 'linear-gradient(150deg, #202932, #0F1215)' }}>
+                  <Camera size={64} className="text-white/15" />
+                </div>
+              )}
               <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent">
                 <span className="text-[10px] font-semibold tracking-[0.2em] text-accent uppercase">{active.category}</span>
                 <p className="mt-1 font-display font-bold text-white text-xl">{active.title}</p>
