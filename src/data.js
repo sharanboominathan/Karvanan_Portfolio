@@ -92,6 +92,7 @@ import videoHighlight03 from './assets/video-highlight-03.mp4'
 import videoHighlight04 from './assets/video-highlight-04.mp4'
 import bharatham01 from './assets/bharatham-01.mov'
 import bharatham02 from './assets/bharatham-02.mov'
+import mainVideo from './assets/main-video.mp4'
 
 export const portfolioCategories = ['All', 'Videography', 'Cinematography']
 
@@ -102,4 +103,5 @@ export const portfolioItems = [
   { id: 4, category: 'Videography', title: 'Documented Occasions', tall: true, video: bharatham02 },
   { id: 5, category: 'Cinematography', title: 'Motion & Light', tall: false, video: videoHighlight03 },
   { id: 6, category: 'Videography', title: 'Highlight Reel', tall: false, video: videoHighlight04 },
+  { id: 7, category: 'Videography', title: 'Main Highlight', featured: true, video: mainVideo },
 ]

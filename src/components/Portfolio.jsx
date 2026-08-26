@@ -9,6 +9,7 @@ export default function Portfolio() {
   const [glow, setGlow] = useState({ x: 0, y: 0, visible: false })
 
   const filtered = filter === 'All' ? portfolioItems : portfolioItems.filter((i) => i.category === filter)
+  const sorted = [...filtered].sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0))
 
   const handleMouseMove = (e) => {
     const rect = e.currentTarget.getBoundingClientRect()
@@ -53,7 +54,7 @@ export default function Portfolio() {
         <div
           onMouseMove={handleMouseMove}
           onMouseLeave={() => setGlow((g) => ({ ...g, visible: false }))}
-          className="relative columns-1 sm:columns-2 lg:columns-3 gap-5 space-y-5"
+          className="relative grid grid-cols-2 lg:grid-cols-4 auto-rows-[140px] sm:auto-rows-[160px] lg:auto-rows-[170px] [grid-auto-flow:dense] gap-5"
         >
           {glow.visible && (
             <div
@@ -65,7 +66,7 @@ export default function Portfolio() {
             />
           )}
           <AnimatePresence mode="popLayout">
-            {filtered.map((item) => (
+            {sorted.map((item) => (
               <motion.button
                 key={item.id}
                 layout
@@ -76,8 +77,12 @@ export default function Portfolio() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5 }}
                 onClick={() => setActive(item)}
-                className={`group relative block w-full overflow-hidden rounded-neu neu-card text-left ${
-                  item.tall ? 'aspect-[3/4]' : 'aspect-[4/3]'
+                className={`group relative block w-full h-full overflow-hidden rounded-neu neu-card text-left ${
+                  item.featured
+                    ? 'col-span-2 row-span-2'
+                    : item.tall
+                    ? 'col-span-1 row-span-2'
+                    : 'col-span-1 row-span-1'
                 }`}
               >
                 {item.video ? (
